@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNet.Identity;
+@model BlogDemo.Models.Blog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <h2>Details</h2>
+    <div class="page-header">
+        <h1>
+            @Html.DisplayFor(model => model.BlogTitle)
+
+        </h1>
+    </div>
+    <p class="lead">@Html.DisplayFor(model => model.BlogText)</p>
+    <p class="small">By @Html.DisplayFor(model => model.User.Email) on @Html.DisplayFor(model => model.CreatedOn)</p>
+    <br /><br />
+    <h4>User Comments</h4>
+    @Html.ActionLink("Add a comment", "Create", "Comments", new { id = Model.Id }, null)
+    <br />
+    @foreach (var item in Model.Comments)
+    {
+        @Html.DisplayFor(modelItem => item.CommentText)
+        @Html.DisplayFor(modelItem => item.CreatedOn)
+        @Html.DisplayFor(modelItem => item.User.Email)
+        if (User.Identity.GetUserId() == item.User.Id)
+        {
+            @Html.ActionLink("Edit", "Edit", "Comments", new { id = item.Id }, null)
+            @Html.ActionLink("Delete", "Delete", "Comments", new { id = item.Id }, null)
+        }
+
+        <br />
+        <br />
+
+    }
+
+</div>
+

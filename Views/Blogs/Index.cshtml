@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BlogDemo.Models.Blog>
+
+@{
+    ViewBag.Title = "Blogs";
+}
+
+
+<div class="container">
+    <h2>Blogs</h2>
+    @Html.ActionLink("Manage your posts", "Manage", null, null)
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                @Html.ActionLink(item.BlogTitle, "BlogDetails", new { id = item.Id }, null)
+                
+            </h1>
+        </div>
+        <p class="lead">@Html.DisplayFor(modelItem => item.BlogText)</p>
+        <p class="small">By @Html.DisplayFor(modelItem => item.User.Email) on @Html.DisplayFor(modelItem => item.CreatedOn)</p>
+    </div>
+}
+
