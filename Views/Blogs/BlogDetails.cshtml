@@ -18,20 +18,19 @@
     <br /><br />
     <h4>User Comments</h4>
     @Html.ActionLink("Add a comment", "Create", "Comments", new { id = Model.Id }, null)
-    <br />
+    <hr />
     @foreach (var item in Model.Comments)
     {
-        @Html.DisplayFor(modelItem => item.CommentText)
-        @Html.DisplayFor(modelItem => item.CreatedOn)
-        @Html.DisplayFor(modelItem => item.User.Email)
+        <p>@Html.DisplayFor(modelItem => item.CommentText)</p>
+       
+        <p>By @Html.DisplayFor(modelItem => item.User.Email) on  @Html.DisplayFor(modelItem => item.CreatedOn)</p>
         if (User.Identity.GetUserId() == item.User.Id)
         {
-            @Html.ActionLink("Edit", "Edit", "Comments", new { id = item.Id }, null)
+            @Html.ActionLink("Edit ", "Edit", "Comments", new { id = item.Id }, null) 
             @Html.ActionLink("Delete", "Delete", "Comments", new { id = item.Id }, null)
         }
 
-        <br />
-        <br />
+        <hr />
 
     }
 
